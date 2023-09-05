@@ -4,6 +4,7 @@ import SortPopup, { sortList } from '../components/SortPopup';
 import LoadingBlock from '../components/PizzaBlock/Skeleton';
 import PizzaBlock from '../components/PizzaBlock';
 import Pagination from '../components/Pagination';
+import Line from '../components/Line/Line'
 import { useSelector } from 'react-redux';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
@@ -96,13 +97,30 @@ const Home: React.FC = () => {
 
     return (
         <div className="container">
-            <div className="content__top">
-                <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-                <SortPopup value={sort} />
+            <div className="content">
+                <div className="content_header">
+                    <div className="menu-burger">
+                        <div className="burger">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div className="content__title">Меню</div>
+                    </div>
+                    <SortPopup value={sort} />
+                </div>
+                <div className="content__top">
+
+                    <div className="sidebar">
+                        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+                    </div>
+                    <div className="content__main">
+                        <div className="content__items">{status === 'loading' ? skeletons : itemsPizzas}</div>
+                    </div>
+                </div>
+                <Pagination currentPage={currentPage} onChangePage={onChangePage} />
+                <Line></Line>
             </div>
-            <h2 className="content__title">Пиццы</h2>
-            <div className="content__items">{status === 'loading' ? skeletons : itemsPizzas}</div>
-            <Pagination currentPage={currentPage} onChangePage={onChangePage} />
         </div>
     );
 };
