@@ -15,7 +15,7 @@ body {
     .categories{
         ul{
             li{
-                padding: 5px;
+                padding: 10px;
                 &:not(:last-child){
                     margin-bottom: 20px;
                 }
@@ -83,7 +83,6 @@ body {
 }
 
 .content {
-    padding: 40px 0;
 
     &__title {
         text-align: center;

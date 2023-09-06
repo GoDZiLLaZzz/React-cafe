@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { clsx } from 'clsx';
 import {addItem, minusItem, removeItem} from "../redux/cart/slice";
-import {CartItem} from "../redux/cart/types";
+import {CartItem, CartSliceState} from "../redux/cart/types";
+import {getCartFromLocalStorage} from "../utils/getCartFromLocalStorage";
 
 type CartItemProps = {
     id: string;
@@ -24,7 +25,9 @@ const CartItemBlock: React.FC<CartItemProps> = ({
     size,
 }) => {
     const dispatch = useDispatch();
+    //const [totalPrice, setTotalPrice] = React.useState<number>(price * count);
     const totalPrice = price * count;
+
 
     const onClickAdd = () => {
         dispatch(addItem({ id } as CartItem));
@@ -39,8 +42,10 @@ const CartItemBlock: React.FC<CartItemProps> = ({
     };
 
     const onRemoveItem = () => {
+        dispatch(removeItem(id));
         if (window.confirm('Вы действительно хотите удалить товар?')) {
             dispatch(removeItem(id));
+            //setTotalPrice(0)
         }
     };
 

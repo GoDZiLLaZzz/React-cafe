@@ -5,10 +5,13 @@ import CartItemBlock from '../components/CartItemBlock';
 import CartEmpty from "../components/CartEmpty";
 import {selectCart} from "../redux/cart/selectors";
 import {clearItems} from "../redux/cart/slice";
+import {CartSliceState} from "../redux/cart/types";
+import {getCartFromLocalStorage} from "../utils/getCartFromLocalStorage";
 
 const Cart: React.FC = () => {
-  const { items, totalPrice } = useSelector(selectCart);
+  let { items, totalPrice } = useSelector(selectCart);
   const dispatch = useDispatch();
+
 
   const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
@@ -22,6 +25,7 @@ const Cart: React.FC = () => {
     return <CartEmpty />
   }
 
+  // @ts-ignore
   return (
     <div className="container container--cart">
       <div className="cart">
